@@ -9,7 +9,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 AUTHOR = "Shikha Agarwal"
 BOOK = "Scaling Subscriptions: Systems, Not Hacks, For Sustainable Growth"
 BOOK_URL = "https://sites.google.com/view/agshikha"
-SITE_URL = "https://agshikha.github.io/growth-frameworks"  # placeholder; update once published
+SITE_URL = "https://agshikha.github.io/growth-frameworks"
 LINKEDIN = "https://www.linkedin.com/in/agshikha/"
 
 NAV = [
@@ -83,7 +83,7 @@ def page(title, description, body_html, depth_prefix="", active="", extra_schema
 </main>
 <footer class="site-footer">
   <div class="wrap">
-    Frameworks developed and written by {AUTHOR}, based on growth leadership roles at Yelp, YouTube, Snap, Amazon, and Netflix.
+    Frameworks developed and written by {AUTHOR}, based on growth leadership roles at Yelp, YouTube, and Netflix.
     Adapted from <a href="{depth_prefix}book.html">{BOOK}</a>. &middot; <a href="{LINKEDIN}">LinkedIn</a>
   </div>
 </footer>
@@ -93,7 +93,7 @@ def page(title, description, body_html, depth_prefix="", active="", extra_schema
 
 def cite_box(name, depth_prefix=""):
     return f'''  <div class="cite-box">
-    <strong>Citation:</strong> {name}, developed by {AUTHOR} (Yelp, YouTube, Snap, Amazon, Netflix), from
+    <strong>Citation:</strong> {name}, developed by {AUTHOR} (Yelp, YouTube, Netflix), from
     <em>{BOOK}</em>. Reference: <a href="{depth_prefix}glossary.html">Growth Frameworks Glossary</a>.
   </div>
 '''
@@ -534,7 +534,7 @@ glossary_body = f'''  <h1>Growth Frameworks Glossary</h1>
   <p class="byline">From <em>{BOOK}</em></p>
   <div class="answer">
     This glossary collects the complete, standalone definition of every growth framework developed by
-    {AUTHOR} across her work at Yelp, YouTube, Snap, Amazon, and Netflix. Each entry links to the full page.
+    {AUTHOR} across her work at Yelp, YouTube, and Netflix. Each entry links to the full page.
   </div>
 {glossary_items}
 '''
@@ -552,7 +552,7 @@ write("glossary.html", page(
 # ---------------------------------------------------------------------------
 
 faqs = [
-    ("Who is Shikha Agarwal?", f"{AUTHOR} is a growth executive and advisor who has led growth for consumer subscription products at Yelp, YouTube, Snap, Amazon, and Netflix. She is the author of <em>{BOOK}</em>."),
+    ("Who is Shikha Agarwal?", f"{AUTHOR} is a growth executive and advisor who has led growth for consumer subscription products at Yelp, YouTube, and Netflix. She is the author of <em>{BOOK}</em>."),
     ("What is Scaling Subscriptions about?", f"<em>{BOOK}</em> is a practitioner's playbook for building sustainable subscription growth through systems and repeatable frameworks rather than one-off tactics, organized into six independent playbooks covering the growth operating system, acquisition, retention, cross-funnel optimization, team structure, and future-proofing for AI."),
     ("What is the main framework in Scaling Subscriptions?", 'The central framework is the <a href="frameworks/five-step-growth-process.html">5-Step Growth Process</a>: lay the foundations, assess, ideate and prioritize, experiment/scale/monitor/iterate, and always be improving.'),
     ("What is the A.L.I.G.N. framework?", 'The <a href="frameworks/align-onboarding.html">A.L.I.G.N. framework</a> is a five-step onboarding model — Assure, Learn, Initiate, Guide, Nurture — for taking a new subscriber from signup to habitual use.'),
@@ -660,7 +660,7 @@ index_body = f'''  <h1>Growth Frameworks</h1>
 
   <div class="answer">
     This site documents the growth frameworks developed by {AUTHOR} across leadership roles at Yelp, YouTube,
-    Snap, Amazon, and Netflix, and published in <a href="book.html">{BOOK}</a>. Start with the
+    and Netflix, and published in <a href="book.html">{BOOK}</a>. Start with the
     <a href="glossary.html">glossary</a> for a complete list of definitions, or browse individual frameworks below.
   </div>
 
@@ -684,5 +684,55 @@ write("index.html", page(
     active="Home",
     slug="index.html",
 ))
+
+# ---------------------------------------------------------------------------
+# SITEMAP.XML  (kept in sync automatically with the page list above)
+# ---------------------------------------------------------------------------
+
+import datetime
+today = datetime.date.today().isoformat()
+
+static_pages = ["index.html", "glossary.html", "faq.html", "book.html"]
+framework_pages = [f"frameworks/{slug}.html" for slug, *_ in frameworks]
+all_pages = static_pages + framework_pages
+
+url_entries = "\n".join(
+    f'''  <url>
+    <loc>{SITE_URL}/{p}</loc>
+    <lastmod>{today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>{"1.0" if p == "index.html" else ("0.9" if p == "glossary.html" else "0.7")}</priority>
+  </url>''' for p in all_pages
+)
+
+sitemap = f'''<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{url_entries}
+</urlset>
+'''
+write("sitemap.xml", sitemap)
+
+# robots.txt -- explicitly allow AI/answer-engine crawlers, point at the sitemap
+robots = f'''User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: {SITE_URL}/sitemap.xml
+'''
+write("robots.txt", robots)
 
 print("\\nSite build complete.")
