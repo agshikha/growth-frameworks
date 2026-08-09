@@ -1,0 +1,203 @@
+/* Scaling Subscriptions -- Growth Frameworks Reference
+   Clean, minimal, text-forward. No decorative branding. */
+
+:root {
+  --text: #1a1a1a;
+  --muted: #5b5b5b;
+  --border: #e2e2e2;
+  --accent: #1f4e5f;
+  --bg: #ffffff;
+  --bg-subtle: #f7f7f5;
+  --max-width: 760px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  line-height: 1.65;
+  font-size: 17px;
+}
+
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+
+header.site-header {
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+header.site-header .wrap {
+  padding-top: 1.5rem;
+  padding-bottom: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+}
+
+header.site-header a.site-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+nav.site-nav {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.92rem;
+}
+
+nav.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+nav.site-nav a:hover { color: var(--accent); }
+
+main { display: block; }
+
+h1 {
+  font-size: 1.7rem;
+  line-height: 1.3;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: 1.25rem;
+  margin: 2.25rem 0 0.75rem;
+  padding-top: 0.25rem;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: 1.05rem;
+  margin: 1.5rem 0 0.5rem;
+}
+
+p { margin: 0 0 1rem; }
+
+.subtitle {
+  color: var(--muted);
+  font-size: 1.02rem;
+  margin: 0 0 1.75rem;
+}
+
+.answer {
+  background: var(--bg-subtle);
+  border-left: 3px solid var(--accent);
+  padding: 0.9rem 1.1rem;
+  margin: 0 0 1.5rem;
+  font-size: 1.02rem;
+}
+
+ul, ol {
+  padding-left: 1.3rem;
+  margin: 0 0 1.1rem;
+}
+
+li { margin-bottom: 0.4rem; }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0 0 1.5rem;
+  font-size: 0.95rem;
+}
+
+th, td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.65rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: var(--bg-subtle);
+  font-weight: 600;
+}
+
+a { color: var(--accent); }
+
+.byline {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0 0 2rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+  margin: 1.5rem 0 2rem;
+}
+
+@media (max-width: 560px) {
+  .card-grid { grid-template-columns: 1fr; }
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.9rem 1rem;
+  text-decoration: none;
+  color: var(--text);
+  display: block;
+}
+
+.card:hover { border-color: var(--accent); }
+
+.card .card-title {
+  font-weight: 600;
+  font-size: 0.98rem;
+  margin-bottom: 0.25rem;
+}
+
+.card .card-desc {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.faq-item { margin-bottom: 1.5rem; }
+.faq-item h3 { margin-top: 0; }
+
+footer.site-footer {
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+  padding: 1.5rem 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.cite-box {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.1rem;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.tag {
+  display: inline-block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.1rem 0.45rem;
+  margin-right: 0.4rem;
+}
